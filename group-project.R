@@ -156,7 +156,7 @@ occupancy <- list(
 
 # Define UI for application
 ui <- fluidPage(
-  theme=shinytheme("cyborg"),
+  theme=shinytheme("flatly"),
 
   # Application title
   h4("Analysis on Hospitals Beds Availability for Covid-19 Treatment in Malaysia"),
