@@ -154,6 +154,9 @@ occupancy <- list(
   "< 80%" = "not full"
 )
 
+# read csv
+df_ori <- import("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI")
+
 # Define UI for application
 ui <- fluidPage(
   theme=shinytheme("flatly"),
@@ -176,12 +179,10 @@ ui <- fluidPage(
 
 # Define server logic
 server <- function(input, output, session) {
-  data <- eventReactive(c(input$state, input$hospital), {
-    # read csv
-    import("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI")
-  })
   observeEvent(input$state, {
-    df <- data()
+    # get latest stats
+    df <- filter(df_ori, datetime_sixMonths == max(datetime_sixMonths))
+
     # filter state
     if (input$state != "All") {
       df <- filter(df, state == input$state)
@@ -190,14 +191,12 @@ server <- function(input, output, session) {
     # filter date
     # date <- paste(input$date, paste(hour(input$time), minute(input$time), sep = ":"))
     # df <- filter(df, as.POSIXct(datetime_sixMonths) <= as.POSIXct(date))
-
-    # get only latest stats
-    df <- filter(df, datetime_sixMonths == max(datetime_sixMonths))
 
     updateSelectInput(session, "hospital", choices = c("All", df$hospital))
   })
   output$map <- renderLeaflet({
-    df <- data()
+    # get latest stats
+    df <- filter(df_ori, datetime_sixMonths == max(datetime_sixMonths))
 
     # filter state
     if (input$state != "All") {
@@ -207,9 +206,6 @@ server <- function(input, output, session) {
     # filter date
     # date <- paste(input$date, paste(hour(input$time), minute(input$time), sep = ":"))
     # df <- filter(df, as.POSIXct(datetime_sixMonths) <= as.POSIXct(date))
-
-    # get only latest stats
-    df <- filter(df, datetime_sixMonths == max(datetime_sixMonths))
 
     # filter hospital
     if (input$hospital != "All") {
