@@ -176,15 +176,17 @@ server <- function(input, output, session) {
     x <<- input$state
     # read csv
     df <- read.csv("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI")
-    
+
     # filter state
     if (input$state != "All") {
       df <- filter(df, state == input$state)
     }
-    
+
     # filter date
-    date <- paste(input$date, paste(hour(input$time), minute(input$time), sep = ":"))
+    # date <- paste(input$date, paste(hour(input$time), minute(input$time), sep = ":"))
     # df <- filter(df, as.POSIXct(datetime_sixMonths) <= as.POSIXct(date))
+
+    # get only latest stats
     df <- filter(df, datetime_sixMonths == max(datetime_sixMonths))
 
     updateSelectInput(session, "hospital", choices = c("All", df$hospital))
@@ -199,10 +201,12 @@ server <- function(input, output, session) {
     }
 
     # filter date
-    date <- paste(input$date, paste(hour(input$time), minute(input$time), sep = ":"))
+    # date <- paste(input$date, paste(hour(input$time), minute(input$time), sep = ":"))
     # df <- filter(df, as.POSIXct(datetime_sixMonths) <= as.POSIXct(date))
+
+    # get only latest stats
     df <- filter(df, datetime_sixMonths == max(datetime_sixMonths))
-    
+
     # filter hospital
     if (input$hospital != "All") {
       df <- filter(df, hospital == input$hospital)
