@@ -160,9 +160,9 @@ ui <- fluidPage(
     sidebarPanel(
       selectInput("state", "State", state, "All"),
       selectInput("hospital", "Hospital", c(""), "All"),
-      selectInput("occupancy", "Occupayncy", occupancy, "All"),
-      dateInput("date", "Date"),
-      timeInput("time", "Time", seconds = FALSE, value = strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S"))
+      # selectInput("occupancy", "Occupayncy", occupancy, "All"),
+      # dateInput("date", "Date"),
+      # timeInput("time", "Time", seconds = FALSE, value = strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S"))
     ),
     mainPanel(
       leafletOutput("map")
@@ -184,7 +184,7 @@ server <- function(input, output, session) {
     
     # filter date
     date <- paste(input$date, paste(hour(input$time), minute(input$time), sep = ":"))
-    df <- filter(df, as.POSIXct(datetime_sixMonths) <= as.POSIXct(date))
+    # df <- filter(df, as.POSIXct(datetime_sixMonths) <= as.POSIXct(date))
     df <- filter(df, datetime_sixMonths == max(datetime_sixMonths))
 
     updateSelectInput(session, "hospital", choices = c("All", df$hospital))
@@ -200,7 +200,7 @@ server <- function(input, output, session) {
 
     # filter date
     date <- paste(input$date, paste(hour(input$time), minute(input$time), sep = ":"))
-    df <- filter(df, as.POSIXct(datetime_sixMonths) <= as.POSIXct(date))
+    # df <- filter(df, as.POSIXct(datetime_sixMonths) <= as.POSIXct(date))
     df <- filter(df, datetime_sixMonths == max(datetime_sixMonths))
     
     # filter hospital
@@ -212,14 +212,14 @@ server <- function(input, output, session) {
     df <- mutate(df, ratio = occupancy / allocated_beds)
 
     # filter occupancy
-    if (input$occupancy != "All") {
-      df <- switch(input$occupancy,
-        "full" = filter(df, ratio == 1),
-        "very full" = filter(df, (ratio >= 0.90) & (ratio < 1)),
-        "quite full" = filter(df, (ratio >= 0.80) & (ratio < 0.90)),
-        "not full" = filter(df, ratio < 0.80),
-      )
-    }
+    # if (input$occupancy != "All") {
+    #   df <- switch(input$occupancy,
+    #     "full" = filter(df, ratio == 1),
+    #     "very full" = filter(df, (ratio >= 0.90) & (ratio < 1)),
+    #     "quite full" = filter(df, (ratio >= 0.80) & (ratio < 0.90)),
+    #     "not full" = filter(df, ratio < 0.80),
+    #   )
+    # }
 
     # merge df and gps_df
     df <- merge(df, gps_df, by = "hospital")
