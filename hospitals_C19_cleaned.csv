@@ -1,0 +1,101 @@
+state,hospital,mode,allocated_beds,latitude,longitude
+Perlis,Hospital Tuanku Fauziah,Hybrid,156,6.441467154,100.1908122
+Kedah,Hospital Baling,Hybrid,160,5.677899687,100.925838
+Kedah,Hospital Sultan Abdul Halim,Hybrid,150,5.669773866,100.5174146
+Kedah,Hospital Jitra,Hybrid,160,6.27902041,100.4190548
+Kedah,Hospital Kulim,Hybrid,110,5.393302293,100.5733153
+Kedah,Hospital Kuala Nerang,Hybrid,43,6.252800629,100.6103509
+Kedah,Hospital Sik,Hybrid,156,5.812390368,100.7276217
+Kedah,Hospital Yan,Hybrid,140,5.82079244,100.3848009
+Kedah,Hospital Sultanah Bahiyah,Hybrid,160,6.149101835,100.4067812
+Kedah,Hospital Sultanah Maliha,Hybrid,180,6.324971397,99.79868826
+Penang,Hospital Kepala Batas,Full C19,300,5.512828037,100.4370879
+Penang,Hospital Pulau Pinang,Hybrid,328,5.417197865,100.3119381
+Perak,Hospital Raja Permaisuri Bainun,Hybrid,140,4.604068809,101.0910132
+Perak,Hospital Slim River,Hybrid,130,3.83896097,101.4055576
+Perak,Hospital Teluk Intan,Hybrid,160,4.004797541,101.0407739
+Perak,Hospital Seri Manjung,Hybrid,120,4.185777297,100.6624581
+Perak,Hospital Taiping,Hybrid,159,4.8512864,100.7371519
+Selangor,Hospital Selayang,Hybrid,154,3.242813137,101.6464797
+Selangor,Hospital Kajang,Hybrid,160,2.993099993,101.793393
+Selangor,Hospital Ampang,Hybrid,140,3.128489229,101.7644058
+Selangor,Hospital Tengku Ampuan Rahimah,Hybrid,130,3.020506015,101.4414815
+Selangor,Hospital Banting,Hybrid,140,2.803011719,101.4943107
+Selangor,Hospital Shah Alam,Hybrid,150,3.074283426,101.498944
+Selangor,Hospital Serdang,Hybrid,155,2.976138128,101.7202104
+Selangor,Hospital Sungai Buloh,Full C19,205,3.220440273,101.5834834
+WP KL,Hospital Rehabilitasi Cheras,Hybrid,128,3.105742269,101.7289614
+WP KL,Hospital Angkatan Tentera Tuanku Mizan,Hybrid,100,3.209115686,101.7397162
+WP KL,Hospital Kuala Lumpur,Hybrid,90,3.171718205,101.7031
+WP KL,Pusat Perubatan Universiti Malaya,Hybrid,138,3.113933567,101.6534008
+WP KL,Hospital Canselor Tunku Mukhriz,Hybrid,116,3.099438405,101.7259061
+Putrajaya,Hospital Putrajaya,Hybrid,56,2.929277906,101.6749037
+Negeri Sembilan,Hospital Tampin,Full C19,542,2.484968934,102.2338906
+Negeri Sembilan,Hospital Jelebu,Hybrid,106,2.950586588,102.0590863
+Negeri Sembilan,Hospital Jempol,Hybrid,165,2.903382406,102.4075099
+Negeri Sembilan,Hospital Tuanku Jaafar,Hybrid,271,2.710172771,101.9432528
+Melaka,Hospital Melaka,Hybrid,651,2.217395609,102.2615925
+Johor,Hospital Sultanah Nora Ismail,Hybrid,229,1.837741187,102.9412543
+Johor,Hospital Sultanah Aminah,Hybrid,198,1.499673394,103.7424678
+Johor,Hospital Temenggong Seri Maharaja Tun Ibrahim,Hybrid,238,1.639938837,103.6245808
+Johor,Hospital Sultan Ismail,Hybrid,173,1.546477246,103.7914734
+Johor,Hospital Kota Tinggi,Hybrid,263,1.735219123,103.9000979
+Johor,Hospital Mersing,Hybrid,218,2.429613784,103.8458677
+Johor,Hospital Pakar Sultanah Fatimah,Hybrid,224,2.05790842,102.5739413
+Johor,Hospital Tangkak,Hybrid,318,2.272256463,102.5476775
+Johor,Hospital Pontian,Hybrid,218,1.498641925,103.385883
+Johor,Hospital Segamat,Hybrid,180,2.493408438,102.8597284
+Johor,Hospital Permai,Hybrid,218,1.521624223,103.7071319
+Johor,Hospital Enche Besar Hajjah Khalsom,Hybrid,150,2.006859086,103.3484741
+Pahang,Hospital Bentong,Hybrid,118,3.525422778,101.905975
+Pahang,Hospital Sultanah Hajjah Kalsom,Hybrid,52,4.466945331,101.3919063
+Pahang,Hospital Jengka,Hybrid,93,3.773298481,102.5526077
+Pahang,Hospital Pekan,Hybrid,133,3.502408408,103.3806681
+Pahang,Hospital Raub,Hybrid,40,3.81010889,101.8520285
+Pahang,Hospital Muadzam Shah,Hybrid,73,3.053970512,103.0914955
+Pahang,Hospital Tengku Ampuan Afzan,Hybrid,47,3.80103505,103.3221263
+Pahang,Hospital Sultan Haji Ahmad Shah,Hybrid,73,3.453397343,102.4539478
+Pahang,Hospital Kuala Lipis,Hybrid,30,4.182743696,102.0562143
+Terengganu,Hospital Setiu,Full C19,50,5.514330395,102.7700746
+Terengganu,Hospital Dungun,Hybrid,120,4.752058053,103.4156793
+Terengganu,Hospital Sultanah Nur Zahirah,Hybrid,118,5.324055546,103.1512852
+Terengganu,Hospital Hulu Terengganu,Full C19,187,5.073430028,103.0451288
+Kelantan,Hospital Jeli,Hybrid,140,5.701396848,101.8446337
+Kelantan,Hospital Machang,Full C19,73,5.763316984,102.2264844
+Kelantan,Hospital Pasir Mas,Hybrid,60,6.014185116,102.1193895
+Kelantan,Hospital Universiti Sains Malaysia,Hybrid,100,6.100120441,102.282991
+Kelantan,Hospital Raja Perempuan Zainab II,Hybrid,98,6.125448301,102.2465918
+Kelantan,Hospital Sultan Ismail Petra,Hybrid,50,6.132552571,102.2375474
+Kelantan,Hospital Tumpat,Full C19,62,6.189898683,102.1578405
+Kelantan,Hospital Kuala Krai Lama,Full C19,45,5.536091664,102.2000448
+Kelantan,Hospital Tanah Merah,Hybrid,78,5.810172543,102.1528168
+Sabah,Hospital Kota Marudu,Hybrid,150,6.457529002,116.7760851
+Sabah,Hospital Kudat,Hybrid,47,6.906801149,116.8386937
+Sabah,Hospital Semporna,Hybrid,253,4.483022019,118.6053062
+Sabah,Hospital Queen Elizabeth,Hybrid,70,5.966739735,116.0948105
+Sabah,Hospital Wanita dan Kanak-kanak Likas,Hybrid,130,6.013963936,116.1200471
+Sabah,Hospital Tawau,Hybrid,100,4.249945184,117.8814188
+Sabah,Hospital Lahad Datu,Hybrid,280,5.026870378,118.3145426
+Sabah,Hospital Duchess of Kent,Hybrid,78,5.859092435,118.1036425
+Sabah,Hospital Keningau,Hybrid,250,5.370352008,116.1823176
+Sarawak,Hospital Bau,Hybrid,52,1.429629203,110.1431905
+Sarawak,Hospital Betong,Hybrid,47,1.37415371,111.5742603
+Sarawak,Hospital Dalat,Hybrid,72,2.745399077,111.9463204
+Sarawak,Hospital Daro,Hybrid,33,2.521979191,111.4135102
+Sarawak,Hospital Kanowit,Hybrid,72,2.102972529,112.152904
+Sarawak,Hospital Kapit,Hybrid,52,2.014036752,112.9433316
+Sarawak,Hospital Lawas,Hybrid,99,4.854555047,115.4050521
+Sarawak,Hospital Limbang,Hybrid,64,4.764434251,115.0196376
+Sarawak,Hospital Lundu,Hybrid,86,1.67577571,109.8531099
+Sarawak,Hospital Marudi,Hybrid,130,4.178568596,114.3261914
+Sarawak,Hospital Mukah,Hybrid,70,2.901044896,112.0769744
+Sarawak,Hospital Saratok,Hybrid,64,1.747335826,111.3402879
+Sarawak,Hospital Sarikei,Hybrid,69,2.132135175,111.4924845
+Sarawak,Hospital Serian,Hybrid,59,1.176394517,110.5642535
+Sarawak,Hospital Simunjan,Hybrid,72,1.370197258,110.7868768
+Sarawak,Hospital Sri Aman,Hybrid,20,1.234583899,111.4632786
+Sarawak,Hospital Umum Sarawak,Hybrid,124,1.543881821,110.3404404
+Sarawak,Hospital Miri,Hybrid,72,4.374546248,114.0004347
+Sarawak,Hospital Bintulu,Hybrid,104,3.22990993,113.1015665
+Sarawak,Hospital Sibu,Hybrid,90,2.296610359,111.8921894
+WP Labuan,Hospital Labuan,Hybrid,12,5.311294547,115.2309727
