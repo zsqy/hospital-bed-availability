@@ -172,11 +172,12 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
-  observeEvent(input$state, {
-    x <<- input$state
+  data <- eventReactive(c(input$state, input$hospital), {
     # read csv
-    df <- read.csv("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI")
-
+    read.csv("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI", nrows=100)
+  })
+  observeEvent(input$state, {
+    df <- data()
     # filter state
     if (input$state != "All") {
       df <- filter(df, state == input$state)
@@ -192,8 +193,7 @@ server <- function(input, output, session) {
     updateSelectInput(session, "hospital", choices = c("All", df$hospital))
   })
   output$map <- renderLeaflet({
-    # read csv
-    df <- read.csv("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI")
+    df <- data()
 
     # filter state
     if (input$state != "All") {
