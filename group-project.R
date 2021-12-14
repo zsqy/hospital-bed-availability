@@ -14,6 +14,7 @@ library(data.table)
 library(dplyr)
 library(leaflet)
 library(lubridate)
+library(rio)
 library(shinyTime)
 library(sp)
 
@@ -174,7 +175,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   data <- eventReactive(c(input$state, input$hospital), {
     # read csv
-    read.csv("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI", nrows=100)
+    import("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI")
   })
   observeEvent(input$state, {
     df <- data()
