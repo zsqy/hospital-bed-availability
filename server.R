@@ -124,27 +124,6 @@ gps <- list(
 )
 gps_df <- as.data.frame(do.call(rbind, gps))
 
-# source("state.R")
-state <- list(
-  "All" = "All",
-  "Johor" = "Johor",
-  "Kedah" = "Kedah",
-  "Kelantan" = "Kelantan",
-  "Melaka" = "Melaka",
-  "Negeri Sembilan" = "Negeri Sembilan",
-  "Pahang" = "Pahang",
-  "Penang" = "Penang",
-  "Perak" = "Perak",
-  "Perlis" = "Perlis",
-  "Putrajaya" = "Putrajaya",
-  "Sabah" = "Sabah",
-  "Sarawak" = "Sarawak",
-  "Selangor" = "Selangor",
-  "Terengganu" = "Terengganu",
-  "WP KL" = "WP KL",
-  "WP Labuan" = "WP Labuan"
-)
-
 # source("occupancy.R")
 occupancy <- list(
   "All" = "All",
@@ -156,26 +135,6 @@ occupancy <- list(
 
 # read csv
 df_ori <- import("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI")
-
-# Define UI for application
-ui <- fluidPage(
-  theme=shinytheme("flatly"),
-
-  # Application title
-  h4("Analysis on Hospitals Beds Availability for Covid-19 Treatment in Malaysia"),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("state", "State", state, "All"),
-      selectInput("hospital", "Hospital", c(""), "All"),
-      # selectInput("occupancy", "Occupayncy", occupancy, "All"),
-      # dateInput("date", "Date"),
-      # timeInput("time", "Time", seconds = FALSE, value = strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S"))
-    ),
-    mainPanel(
-      leafletOutput("map")
-    ),
-  )
-)
 
 # Define server logic
 server <- function(input, output, session) {
@@ -314,4 +273,4 @@ server <- function(input, output, session) {
 }
 
 # Run the application
-shinyApp(ui = ui, server = server)
+# shinyApp(ui = ui, server = server)
