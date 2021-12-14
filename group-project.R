@@ -9,12 +9,13 @@
 # Date:  13/12/21
 #
 
-# install.packages(c("leaflet", "sp", "shinyTime"))
+# install.packages(c("leaflet", "shinythemes", shinyTime", "sp"))
 library(data.table)
 library(dplyr)
 library(leaflet)
 library(lubridate)
 library(rio)
+library(shinythemes)
 library(shinyTime)
 library(sp)
 
@@ -155,6 +156,8 @@ occupancy <- list(
 
 # Define UI for application
 ui <- fluidPage(
+  theme=shinytheme("cyborg"),
+
   # Application title
   h4("Analysis on Hospitals Beds Availability for Covid-19 Treatment in Malaysia"),
   sidebarLayout(
@@ -171,7 +174,7 @@ ui <- fluidPage(
   )
 )
 
-# Define server logic required to draw a histogram
+# Define server logic
 server <- function(input, output, session) {
   data <- eventReactive(c(input$state, input$hospital), {
     # read csv
