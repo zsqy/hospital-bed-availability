@@ -9,15 +9,9 @@
 # Date:  13/12/21
 #
 
-# install.packages(c("leaflet", "shinythemes", shinyTime", "sp"))
-library(data.table)
+# install.packages(c("dplyr", "rio"))
 library(dplyr)
-library(leaflet)
-library(lubridate)
 library(rio)
-library(shinythemes)
-library(shinyTime)
-library(sp)
 
 # source("hospital-gps.R")
 gps <- list(

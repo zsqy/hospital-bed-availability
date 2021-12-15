@@ -1,3 +1,7 @@
+# install.packages(c("leaflet", "shinythemes"))
+library(leaflet)
+library(shinythemes)
+
 # source("state.R")
 state <- list(
   "All" = "All",
