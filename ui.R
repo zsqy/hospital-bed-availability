@@ -1,27 +1,23 @@
-# install.packages(c("leaflet", "shinythemes"))
+# Authors:
+#   Wong Hui Yeok (S2124360)
+#   Jonathan Kiew Weng Kiat (S2043163)
+#   Ng Boon Jane (S2117897)
+#   Hong Zi Shen (S2114600)
+# Title: Analysis on Hospitals Beds Availability for Covid-19 Treatment in Malaysia
+# Class: WQD 7001 Principle of Data Science
+# Date:  19/12/21
+
+# install.packages(c("leaflet", "shinythemes", "rio"))
 library(leaflet)
 library(shinythemes)
+library(rio)
 
-# source("state.R")
-state <- list(
-  "All" = "All",
-  "Johor" = "Johor",
-  "Kedah" = "Kedah",
-  "Kelantan" = "Kelantan",
-  "Melaka" = "Melaka",
-  "Negeri Sembilan" = "Negeri Sembilan",
-  "Pahang" = "Pahang",
-  "Penang" = "Penang",
-  "Perak" = "Perak",
-  "Perlis" = "Perlis",
-  "Putrajaya" = "Putrajaya",
-  "Sabah" = "Sabah",
-  "Sarawak" = "Sarawak",
-  "Selangor" = "Selangor",
-  "Terengganu" = "Terengganu",
-  "WP KL" = "WP KL",
-  "WP Labuan" = "WP Labuan"
-)
+# Read CSV files
+gps_df <- read.csv('hospitals_C19_cleaned.csv')
+df_ori <- import("https://raw.githubusercontent.com/HuiYeok1107/HospitalsCapacity/master/hospitals_occupancy.csv?token=AL5ZPSBUXMKN6BKUZEQDLKTBYARGI")
+
+# Get all the states in Malaysia
+state <- append('All', gps_df$state)
 
 # Define UI for application
 ui <- fluidPage(
@@ -33,12 +29,17 @@ ui <- fluidPage(
     sidebarPanel(
       selectInput("state", "State", state, "All"),
       selectInput("hospital", "Hospital", c(""), "All"),
-      # selectInput("occupancy", "Occupayncy", occupancy, "All"),
-      # dateInput("date", "Date"),
-      # timeInput("time", "Time", seconds = FALSE, value = strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S"))
     ),
     mainPanel(
-      leafletOutput("map")
-    ),
+      tabsetPanel(
+        tabPanel("Map",
+          leafletOutput("map")
+        ),
+        tabPanel("Table", 
+        ),
+        tabPanel("Graph",
+        )
+      )
+    )
   )
 )
