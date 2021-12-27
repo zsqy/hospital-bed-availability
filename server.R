@@ -1,8 +1,8 @@
 # install.packages(c("dplyr", "lubridate"))
 library(dplyr)
 library(ggplot2)
-library(rio)
 library(lubridate)
+library(rio)
 
 # Read CSV files
 gps_df <- read.csv('hospitals_C19_cleaned.csv')
@@ -22,7 +22,7 @@ server <- function(input, output, session) {
     updateSelectInput(session, "hospital", choices = c("All", hospitals_list))
   })
   
-  output$map <- renderLeaflet({
+  data <- reactive({
     # get latest stats
     df <- tail(df_ori, n=100)
 
@@ -57,7 +57,7 @@ server <- function(input, output, session) {
     df_green <- filter(df, ratio < 0.60)
 
     # create leaflet map
-    leaflet() %>%
+    map <- leaflet() %>%
       addTiles() %>%
       # add black markers
       addAwesomeMarkers(
@@ -124,7 +124,87 @@ server <- function(input, output, session) {
         opacity = 1,
         title = "Beds Occupancy"
       )
+
+    # get number of occupied bed
+    totalOccupied <- valueBox(
+      paste(sum(df$occupancy), "/", sum(df$allocated_beds)),
+      "Total Occupied Bed",
+      color = "blue"
+    )
+
+    # get occupancy rate
+    totalOccupancy <- valueBox(
+      sprintf("%0.2f%%", sum(df$occupancy) / sum(df$allocated_beds) * 100),
+      "Total Occupancy Rate",
+      color = "blue"
+    )
+
+    # get number of black hospital
+    totalBlack <- valueBox(
+      count(df_black),
+      "# Hospital Full",
+      #icon = icon("bed"),
+      color = "black"
+    )
+
+    # get number of red hospital
+    totalRed <- valueBox(
+      count(df_red),
+      "# Hospital 80%-99%",
+      color = "red"
+    )
+
+    # get number of orange hospital
+    totalOrange <- valueBox(
+      count(df_orange),
+      "# Hospital 60%-79%",
+      color = "orange"
+    )
+
+    # get number of green hospital
+    totalGreen <- valueBox(
+      count(df_green),
+      "# Hospital Less Than 60%",
+      color = "green"
+    )
+
+    return(list(
+      "map" = map,
+      "totalOccupied" = totalOccupied,
+      "totalOccupancy" = totalOccupancy,
+      "totalBlack" = totalBlack,
+      "totalRed" = totalRed,
+      "totalOrange" = totalOrange,
+      "totalGreen" = totalGreen
+      ))
+  })
+
+  output$map <- renderLeaflet({
+    data()$map
+  })
+
+  output$totalOccupied <- renderInfoBox({
+    data()$totalOccupied
+  })
+
+  output$averageOccupancy <- renderInfoBox({
+    data()$totalOccupancy
+  })
+
+  output$totalBlack <- renderInfoBox({
+    data()$totalBlack
+  })
+
+  output$totalRed <- renderInfoBox({
+    data()$totalRed
+  })
+
+  output$totalOrange <- renderInfoBox({
+    data()$totalOrange
   })
   
+  output$totalGreen <- renderInfoBox({
+    data()$totalGreen
+  })
 }
 
