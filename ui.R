@@ -52,7 +52,10 @@ ui <- fluidPage(
         ),
         tabPanel("Table", 
           br(),
-          dataTableOutput('table')
+          dataTableOutput(
+            'table'
+          )
+          
         ),
         tabPanel("Graph", 
           plotlyOutput('graph',

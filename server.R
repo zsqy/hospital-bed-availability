@@ -168,10 +168,26 @@ server <- function(input, output, session) {
   })
   output$table <- renderDataTable({
     my_df()},
+    extensions = c("Buttons"),
     options = list(
       autoWidth=TRUE,
-      pageLength = 10
+      pageLength = 10,
+      dom = 'Bfrtip',
+      buttons = list(
+        list(extend = "csv", text = "Download Current Page", filename = "page",
+             exportOptions = list(
+               modifier = list(page = "current")
+             )
+        ),
+        list(extend = "csv", text = "Download Full Results", filename = "data",
+             exportOptions = list(
+               modifier = list(page = "all")
+             )
+        )
+      )
     )
+    
+
   )
   
   output$graph <- renderPlotly({
