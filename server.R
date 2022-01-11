@@ -168,6 +168,7 @@ server <- function(input, output, session) {
   })
   output$table <- renderDataTable({
     my_df()},
+    caption = 'Table 1: Records of hospital availability.',
     extensions = c("Buttons"),
     options = list(
       autoWidth=TRUE,
