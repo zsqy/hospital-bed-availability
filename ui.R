@@ -28,7 +28,8 @@ ui <- fluidPage(
     sidebarPanel(
       selectInput("state", "State", state, "All"),
       selectInput("hospital", "Hospital", c(""), "All"),
-      style = "margin-top: 15px;"
+      style = "margin-top: 15px;",
+      width=3
     ),
     mainPanel(
       tags$style(HTML("
@@ -45,16 +46,23 @@ ui <- fluidPage(
         }")),
       tabsetPanel(
         tabPanel("Map",
-          leafletOutput("map"),
+          leafletOutput("map",
+            height = '600px'
+          ),
         ),
         tabPanel("Table", 
+          br(),
+          dataTableOutput('table')
         ),
         tabPanel("Graph", 
-          plotlyOutput('graph'),
+          plotlyOutput('graph',
+            height = '600px'
+          ),
           style = "overflow-y:scroll; overflow-x: hidden; max-height: 1000px;",
         ),
       ),
-      style = "margin-top: 15px;"
+      style = "margin-top: 15px;",
+      width = 9
     )
   )
 )

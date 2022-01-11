@@ -139,6 +139,41 @@ server <- function(input, output, session) {
       )
   })
   
+  # reactive pre processing
+  my_df <- reactive({
+    df <- tail(df_ori, n=100)
+    results <- df
+  
+    # filter state
+    if (input$state == "All") {
+      results 
+    } 
+    else{
+      results <- filter(df, state == input$state)
+    }
+    
+    #filter hospital 
+    if (input$hospital == "All") {
+      results 
+    } 
+    else{
+      results <- filter(results, hospital == input$hospital)
+    }
+    
+    results %>% 
+      select(state, hospital, allocated_beds, occupancy) %>% 
+      mutate(spaces_available=allocated_beds-occupancy) %>% 
+      arrange(desc(spaces_available))
+  
+  })
+  output$table <- renderDataTable({
+    my_df()},
+    options = list(
+      autoWidth=TRUE,
+      pageLength = 10
+    )
+  )
+  
   output$graph <- renderPlotly({
     if (input$state != "All" | (input$state == "All" & input$hospital != "All")) {
       # all hospitals from a single state is selected
