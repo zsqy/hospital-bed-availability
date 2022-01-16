@@ -11,6 +11,7 @@
 library(leaflet)
 library(shinythemes)
 library(plotly)
+library(DT)
 
 # Read CSV files
 gps_df <- read.csv('hospitals_C19_cleaned.csv')
