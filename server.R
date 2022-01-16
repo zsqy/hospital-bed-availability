@@ -32,6 +32,32 @@ df_ori = df_ori[start_idx:stop_idx,]
 
 # Define server logic
 server <- function(input, output, session) {
+  observeEvent(input$do, {
+    showModal(modalDialog(
+      title = "Important message",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis ac turpis non tempor. Proin vel velit at quam faucibus aliquet id vel eros. Proin at sem suscipit, sollicitudin nulla vel, malesuada ex. Nunc mattis vel dui vel varius. Nulla elementum sapien id posuere vulputate. Donec viverra placerat quam, a malesuada ante. Nullam imperdiet nec ex sed rhoncus. Nullam sapien velit, eleifend vitae aliquam vel, bibendum ut purus. Ut lacus massa, laoreet convallis tortor aliquam, auctor accumsan sem. Nam bibendum ac arcu in rhoncus.
+
+Fusce ultricies, mauris in tempor mollis, lectus dui mattis risus, ut aliquet nunc nunc nec dolor. Proin mattis at odio a pulvinar. Suspendisse vitae bibendum libero. Maecenas vestibulum nunc id justo condimentum mollis. Quisque at tellus vel ipsum mollis commodo. Sed bibendum est sed porta suscipit. Quisque aliquam ultricies elit, a posuere velit tincidunt vel. Aenean at sapien ut nibh euismod pharetra. Curabitur nec velit elementum, consequat augue vel, luctus dui.
+
+Sed eleifend finibus tincidunt. Donec venenatis vulputate risus, vel aliquam velit. Nullam luctus elit felis, eu pellentesque felis dapibus eu. Aliquam a dapibus felis. Quisque feugiat nibh a mauris tincidunt finibus eu id mi. Cras eleifend, diam lacinia convallis consequat, erat quam vestibulum magna, sed hendrerit est est et ipsum. Vivamus auctor id urna sit amet posuere. Nulla placerat eget mi sed elementum. Integer malesuada sagittis orci, vitae euismod arcu consequat sit amet. Nullam quis justo ut mauris luctus varius. Mauris dapibus tristique mi, ac accumsan lacus consectetur et.
+
+Nunc gravida rhoncus aliquet. Mauris vitae iaculis nisl. Cras sodales mauris in mauris bibendum cursus. Morbi in porta enim. Sed pulvinar, dui ac eleifend posuere, ante justo rutrum odio, vitae malesuada erat dui et mi. Curabitur eget odio fermentum, tempor velit quis, tincidunt urna. Curabitur rhoncus enim nec convallis sollicitudin. Etiam hendrerit lacus et lacus laoreet iaculis. Vivamus vehicula scelerisque erat et ultricies. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam dui arcu, tempus id felis quis, vulputate tincidunt urna.
+
+Integer ac dignissim ante. Vestibulum vel massa vel sem hendrerit consequat. Suspendisse dui ligula, condimentum non euismod nec, tristique non mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla sollicitudin magna non porttitor posuere. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras porta magna non massa porttitor, nec tempor dui auctor. Duis sit amet odio non arcu gravida condimentum ut ut ligula. Nunc eu mi tincidunt enim venenatis varius. Praesent dapibus justo eget turpis pharetra, sed sodales ligula tincidunt. Sed ut placerat leo. Donec pharetra dolor massa, sed posuere odio maximus vel. Praesent ultricies dolor a condimentum convallis.
+
+Vestibulum aliquet ex vitae tempor sagittis. Duis id urna ac eros imperdiet eleifend at sed erat. Nulla elementum lacinia risus, in tempus dui sollicitudin id. Vestibulum sit amet orci eu nunc consequat bibendum vel a nulla. Nam fermentum aliquam nunc, eu interdum sem ullamcorper vitae. Vivamus id blandit erat. Aliquam magna nisl, pretium nec velit id, commodo hendrerit urna.
+
+Morbi non sagittis ipsum. Nunc egestas lectus in leo viverra, vitae porta mauris pulvinar. Mauris aliquam dapibus libero sed pharetra. Sed nunc elit, viverra eget pretium eu, eleifend et ipsum. Donec ligula velit, pellentesque eu lacinia in, consequat nec odio. Aliquam neque sem, finibus non velit sed, pulvinar maximus tortor. Nunc purus ligula, porttitor et scelerisque vitae, rutrum et libero.
+
+Etiam id interdum mauris, a facilisis nisi. Vivamus a augue sed lectus consequat consequat. Suspendisse malesuada nibh a leo rhoncus ullamcorper. Quisque magna est, aliquam non vulputate cursus, volutpat ac ante. Nullam hendrerit enim ex, sit amet tempor mi accumsan sit amet. Duis dapibus tristique ultrices. Pellentesque volutpat sem enim, fermentum pretium lectus mollis nec. Integer sodales placerat ex, vel congue justo pharetra quis. Pellentesque interdum scelerisque urna, et semper justo convallis vel. Nullam eu viverra ligula.
+
+Integer mattis enim mauris, quis ornare tellus tincidunt ut. Vestibulum sit amet ultrices leo. Duis maximus hendrerit diam, et fermentum augue congue vitae. Sed ante dolor, auctor et fermentum nec, tincidunt id purus. Etiam tempor dignissim urna ut tincidunt. Etiam elementum erat id porta elementum. Vivamus quis enim erat. In dui ex, vulputate elementum maximus ut, hendrerit quis massa. Praesent pulvinar, neque vitae aliquam molestie, odio nunc vestibulum tortor, nec sollicitudin nisi nulla eu mauris. Suspendisse interdum fringilla bibendum. Mauris varius aliquet pretium. Nunc in fermentum diam, ac scelerisque est. In neque nulla, tristique consequat orci at, pharetra tincidunt mi. Aenean convallis, neque et hendrerit ornare, arcu orci auctor lectus, ut pretium enim urna eu erat. Maecenas suscipit aliquam neque sed cursus.
+
+Sed euismod felis mi, venenatis faucibus neque efficitur sit amet. Fusce tempus arcu non faucibus fermentum. Vivamus condimentum quam nibh, et sagittis sem elementum et. Nulla eu dapibus justo. Vivamus tincidunt, sapien nec placerat condimentum, mi quam faucibus ex, sodales ornare lorem augue ut leo. Praesent finibus, enim nec mattis imperdiet, elit augue ornare metus, viverra ornare sapien elit ac ipsum. Nunc id risus ut risus rhoncus semper. Aliquam erat volutpat. Curabitur facilisis dictum cursus. Donec iaculis efficitur commodo.
+
+"
+    ))
+  })
   observeEvent(input$state, {
     # Get all hospitals list    
     hospitals_list <- gps_df$hospital

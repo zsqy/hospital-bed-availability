@@ -24,7 +24,8 @@ ui <- fluidPage(
   theme=shinytheme("flatly"),
   
   # Application title
-  h4("Analysis on Hospitals Beds Availability for Covid-19 Treatment in Malaysia", style="font-weight:bold; margin-top:20px;"),
+  h4("Analysis on Hospitals Beds Availability for Covid-19 Treatment in Malaysia", style="font-weight:bold; margin-top:20px; display:inline-block;"),
+  actionButton("do", "About this app", style="float:right; margin-top:15px; padding:5px;"),
   sidebarLayout(
     sidebarPanel(
       selectInput("state", "State", state, "All"),
