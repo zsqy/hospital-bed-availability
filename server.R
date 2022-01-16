@@ -171,7 +171,7 @@ server <- function(input, output, session) {
     caption = 'Table 1: Records of hospital availability.',
     extensions = c("Buttons"),
     options = list(
-      autoWidth=TRUE,
+      autoWidth=FALSE,
       pageLength = 10,
       dom = 'Bfrtip',
       buttons = list(
