@@ -12,6 +12,7 @@ library(leaflet)
 library(shinythemes)
 library(plotly)
 library(DT)
+library(rintrojs)
 
 # Read CSV files
 gps_df <- read.csv('hospitals_C19_cleaned.csv')
@@ -61,6 +62,7 @@ ui <- fluidPage(
         }")),
       tabsetPanel(
         tabPanel("Map",
+           br(),
            introBox(
              leafletOutput("map", height = '600px'),
              data.step = 3,

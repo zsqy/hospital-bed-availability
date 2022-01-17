@@ -2,6 +2,7 @@
 library(dplyr)
 library(lubridate)
 library(plotly)
+library(rintrojs)
 
 # Read CSV files
 gps_df <- read.csv('hospitals_C19_cleaned.csv')
