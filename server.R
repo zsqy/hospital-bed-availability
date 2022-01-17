@@ -2,6 +2,8 @@
 library(dplyr)
 library(lubridate)
 library(plotly)
+library(rintrojs)
+library(DT)
 
 # Read CSV files
 gps_df <- read.csv('hospitals_C19_cleaned.csv')
@@ -32,6 +34,23 @@ df_ori = df_ori[start_idx:stop_idx,]
 
 # Define server logic
 server <- function(input, output, session) {
+  #observeEvent(input$tour,
+  #             introjs(session, options = list(
+  #               "nextLabel"="Next",
+  #                "prevLabel"="Back"
+  #             ))
+  #)
+  
+  observeEvent(input$tour,
+                introjs(
+                  session, 
+                  events = list(
+                    onbeforechange = readCallback("switchTabs")
+                ))
+               
+
+  )
+  
   observeEvent(input$state, {
     # Get all hospitals list    
     hospitals_list <- gps_df$hospital
