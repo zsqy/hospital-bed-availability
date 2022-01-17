@@ -48,9 +48,9 @@ server <- function(input, output, session) {
   observeEvent(input$do, {
     showModal(modalDialog(
       title = "About this dashboard",easyClose=TRUE, footer = modalButton("Close"),
-      HTML("<p style='margin-bottom:20px;'>This dashboard is designed to solve the issue of the overwhelming capacity of hospitals in offering beds for Covid-19
-treatment caused by the ongoing global Covid-19 pandemic by providing hospital bed occupancy information in multiple
-visually enhancing ways together with filtering mechanism.</p>
+      HTML("<p style='margin-bottom:20px;'>This dashboard is designed for everyone in Malaysia seeking for Covid-19 treatment to check 
+      which hospitals near them in the current hour still have available beds for Covid-19 treatment and view the past six months beds 
+      occupancy trend by state or hospital using multiple visually enhancing ways together with filtering mechanism.</p>
 <p style='margin-bottom:0px;'>The visualisation of the information are presented in the following ways:</p>
 <ul style='margin-bottom:20px;'>
     <li>Map: Hospitals location and information showing in each individual pinpoint on a map</li>
@@ -66,15 +66,26 @@ visually enhancing ways together with filtering mechanism.</p>
 <p style='margin-bottom:0px;'>The filtering mechanism will change the visualisation output based on the inputs selected by the user. The possible filtering outputs are as followed.</p>
 <ul>
     <li>When 'All' State & 'All' Hospital are selected:<br/>
-        All bed occupancy of all hospital across entire Malaysia (i.e., all states) will be presented
+        All bed occupancy of all hospitals across entire Malaysia (i.e., all states) will be presented
     </li>
     <li>When a single State & 'All' Hospital are selected:<br/>
-        All bed occupancy of hospital in the selected state will be presented
+        All bed occupancy of hospitals in the selected state will be presented
     </li>
     <li>When a single Hospital is selected:<br/>
         Only the bed occupancy of the selected hospital will be presented
     </li>
-</ul>")
+</ul>
+<hr style='height:2px'>
+<p style='margin-top:20px;'>This dashboard is created by University Malaya's Master of Data Science students for the coursework of WQD7001 Principles of Data Science:</p>
+<ol>
+  <li>Wong Hui Yeok (S2124360)</li>
+  <li>Jonathan Kiew Weng Kiat (S2043163)</li>
+  <li>Ng Boon Jane (S2117897)</li>
+  <li>Hong Zi Shen (S2114600)</li>
+</ol>
+<p style='margin-top:20px;'>For more information regarding the dashboard, please go to the following Github link: <a style='color:#01608C' href='https://github.com/zsqy/hospital-bed-availability'>https://github.com/zsqy/hospital-bed-availability</a></p>
+
+           ")
     ))
   })
   observeEvent(input$state, {
