@@ -12,6 +12,7 @@ library(leaflet)
 library(shinythemes)
 library(plotly)
 library(DT)
+library(rintrojs)
 
 # Read CSV files
 gps_df <- read.csv('hospitals_C19_cleaned.csv')
@@ -21,15 +22,28 @@ state <- append('All', gps_df$state)
 
 # Define UI for application
 ui <- fluidPage(
+  introjsUI(),
   theme=shinytheme("flatly"),
   
   # Application title
   h4("Analysis on Hospitals Beds Availability for Covid-19 Treatment in Malaysia", style="font-weight:bold; margin-top:20px; display:inline-block;"),
-  actionButton("do", "About", style="float:right; margin-top:15px; padding:5px;"),
+  actionButton("do", "About", style="float:right; margin-top:15px; padding:5px; background-color: hsl(223deg 46% 41%); border-color: hsl(223deg 46% 41%);"),
+  actionButton("tour","Start Tour", style="float:right; margin-top:15px; padding:5px; margin-right:5px; background-color: hsl(223deg 46% 41%); border-color: hsl(223deg 46% 41%);"),
   sidebarLayout(
     sidebarPanel(
-      selectInput("state", "State", state, "All"),
-      selectInput("hospital", "Hospital", c(""), "All"),
+      introBox(
+        selectInput("state", "State", state, "All"),
+        data.step = 1,
+        data.intro = "Select to filter by state."
+      ),
+      
+      introBox(
+        selectInput("hospital", "Hospital", c(""), "All"),
+        data.step = 2,
+        data.intro = "Select to filter by hospital (Hospital choices is affected by state input)."
+      ),
+      # selectInput("state", "State", state, "All"),
+      # selectInput("hospital", "Hospital", c(""), "All"),
       style = "margin-top: 15px;",
       width=3
     ),
@@ -48,20 +62,28 @@ ui <- fluidPage(
         }")),
       tabsetPanel(
         tabPanel("Map",
-          leafletOutput("map",
-            height = '600px'
-          ),
+           br(),
+           introBox(
+             leafletOutput("map", height = '600px'),
+             data.step = 3,
+             data.intro = "Hospitals location and information showing in each individual pinpoint on a map"
+           )
         ),
         tabPanel("Table", 
           br(),
-          dataTableOutput(
-            'table'
+          introBox(
+            dataTableOutput('table', height='600px'),
+            data.step = 4,
+            data.intro = "Hospital information showing in a 2-dimensional row and column format"
           )
           
         ),
-        tabPanel("Graph", 
-          plotlyOutput('graph',
-            height = '600px'
+        tabPanel("Graph",
+          br(),
+          introBox(
+            plotlyOutput('graph', height = '600px'),
+            data.step = 5,
+            data.intro = "Hospital information are plotted in line graph format"
           ),
           style = "overflow-y:scroll; overflow-x: hidden; max-height: 1000px;",
         ),

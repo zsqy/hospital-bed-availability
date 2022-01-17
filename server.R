@@ -2,6 +2,7 @@
 library(dplyr)
 library(lubridate)
 library(plotly)
+library(rintrojs)
 
 # Read CSV files
 gps_df <- read.csv('hospitals_C19_cleaned.csv')
@@ -32,6 +33,18 @@ df_ori = df_ori[start_idx:stop_idx,]
 
 # Define server logic
 server <- function(input, output, session) {
+  observeEvent(
+    input$tour,
+    introjs(
+      session, 
+      options= list(
+        showStepNumbers=TRUE
+      ),
+      events = list(
+        onbeforechange = readCallback("switchTabs")
+      )
+    )
+  )
   observeEvent(input$do, {
     showModal(modalDialog(
       title = "About this dashboard",easyClose=TRUE, footer = modalButton("Close"),
