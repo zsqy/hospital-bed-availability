@@ -5,8 +5,8 @@ library(plotly)
 library(rintrojs)
 
 # Read CSV files
-gps_df <- read.csv('hospitals_C19_cleaned.csv')
-df_ori <- read.csv('hospitals_occupancy.csv')
+gps_df <- read.csv('./Data Cleaning & Generation/hospitals_C19_cleaned.csv')
+df_ori <- read.csv('./Data Cleaning & Generation/hospitals_occupancy.csv')
 
 # Extract only the latest 6 months of data
 currentDateTime = as.POSIXct(paste(as.Date(Sys.time()), hour(Sys.time()), ':', '0', sep=""), tz="Asia/Kuala_Lumpur")
@@ -45,6 +45,7 @@ server <- function(input, output, session) {
       )
     )
   )
+  # Dashboard About Information
   observeEvent(input$do, {
     showModal(modalDialog(
       title = "About this dashboard",easyClose=TRUE, footer = modalButton("Close"),
@@ -133,14 +134,13 @@ server <- function(input, output, session) {
         lng = df_black$longitude,
         lat = df_black$latitude,
         label = paste(
-          df_black$datetime_sixMonths, ": ",
+          df_black$datetime_sixMonths, ': ',
           df_black$hospital, ": ",
           df_black$occupancy, "/", df_black$allocated_beds,
           " (", round(df_black$ratio * 100, 2), "%)",
           sep = ""
         ),
         labelOptions = labelOptions(textsize = "12px"),
-        # labelOptions = if (nrow(df_black) < 5) labelOptions(noHide = T, ),
         icon = icon.black
       ) %>%
       # add red markers
@@ -222,6 +222,7 @@ server <- function(input, output, session) {
       arrange(desc(spaces_available))
   
   })
+  # Table output
   output$table <- renderDataTable({
     my_df()},
     caption = 'Table 1: Records of hospital availability.',
@@ -231,11 +232,13 @@ server <- function(input, output, session) {
       pageLength = 10,
       dom = 'Bfrtip',
       buttons = list(
+        # download current table page
         list(extend = "csv", text = "Download Current Page", filename = "page",
              exportOptions = list(
                modifier = list(page = "current")
              )
         ),
+        # download every pages
         list(extend = "csv", text = "Download Full Results", filename = "data",
              exportOptions = list(
                modifier = list(page = "all")
@@ -320,7 +323,6 @@ server <- function(input, output, session) {
         )
         plotCount = plotCount + 1
       }
-      
       heightsRatios <- list()
       heightsRatios[[1]] <- c(1)
       heightsRatios[[2]] <- c(.5,.5)
@@ -419,7 +421,7 @@ server <- function(input, output, session) {
       fig <- subplot(states_figs, titleX= TRUE, titleY = TRUE, nrows = nRows, margin=c(0.08,0.08,0.0275,0.0275), heights=c(0.1046, 0.1318, 0.1318, 0.1318, 0.1318, 0.1318, 0.1318, 0.1046))
       fig <- fig %>%layout(margin = list(l=0, r=0, b=80, t=85, pad=0), title = list(text="<b style='font-style: oblique;'>Hospitals Beds Occupancy Trend By State</b>", xanchor="middle", yanchor="middle", pad = list(t=20, b = 5000, l = 0, r = 0 )),
                            font = list(family = 'Arial', size = 11),
-                           plot_bgcolor='#e8e8e8',
+                           plot_bgcolor='#F1F9FF',
                            showlegend=FALSE, annotations=annotations)
       fig$sizingPolicy$padding <- "0"
       fig

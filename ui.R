@@ -7,7 +7,7 @@
 # Class: WQD 7001 Principle of Data Science
 # Date:  19/12/21
 
-# install.packages(c("leaflet", "shinythemes", "plotly"))
+# install.packages(c("leaflet", "shinythemes", "plotly", "DT", "rintrojs"))
 library(leaflet)
 library(shinythemes)
 library(plotly)
@@ -15,7 +15,7 @@ library(DT)
 library(rintrojs)
 
 # Read CSV files
-gps_df <- read.csv('hospitals_C19_cleaned.csv')
+gps_df <- read.csv('./Data Cleaning & Generation/hospitals_C19_cleaned.csv')
 
 # Get all the states in Malaysia
 state <- append('All', gps_df$state)
@@ -30,6 +30,7 @@ ui <- fluidPage(
   actionButton("do", "About", style="float:right; margin-top:15px; padding:5px; background-color: hsl(223deg 46% 41%); border-color: hsl(223deg 46% 41%);"),
   actionButton("tour","Start Tour", style="float:right; margin-top:15px; padding:5px; margin-right:5px; background-color: hsl(223deg 46% 41%); border-color: hsl(223deg 46% 41%);"),
   sidebarLayout(
+    # inputs UI
     sidebarPanel(
       introBox(
         selectInput("state", "State", state, "All"),
@@ -42,11 +43,10 @@ ui <- fluidPage(
         data.step = 2,
         data.intro = "Select to filter by hospital (Hospital choices is affected by state input)."
       ),
-      # selectInput("state", "State", state, "All"),
-      # selectInput("hospital", "Hospital", c(""), "All"),
       style = "margin-top: 15px;",
       width=3
     ),
+    # outputs UI
     mainPanel(
       tags$style(HTML("
         .nav-tabs>li>a {
