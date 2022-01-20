@@ -3,7 +3,7 @@
 #   Jonathan Kiew Weng Kiat (S2043163)
 #   Ng Boon Jane (S2117897)
 #   Hong Zi Shen (S2114600)
-# Title: Analysis on Hospitals Beds Availability for Covid-19 Treatment in Malaysia
+# Title: Analysis on Hospital Beds Availability for Covid-19 Treatment in Malaysia
 # Class: WQD 7001 Principle of Data Science
 # Date:  19/12/21
 
@@ -26,7 +26,7 @@ ui <- fluidPage(
   theme=shinytheme("flatly"),
   
   # Application title
-  h4("Analysis on Hospitals Beds Availability for Covid-19 Treatment in Malaysia", style="font-weight:bold; margin-top:20px; display:inline-block;"),
+  h4("Hospital Beds On Spot APP", style="font-weight:bold; margin-top:20px; display:inline-block;"),
   actionButton("do", "About", style="float:right; margin-top:15px; padding:5px; background-color: hsl(223deg 46% 41%); border-color: hsl(223deg 46% 41%);"),
   actionButton("tour","Start Tour", style="float:right; margin-top:15px; padding:5px; margin-right:5px; background-color: hsl(223deg 46% 41%); border-color: hsl(223deg 46% 41%);"),
   sidebarLayout(
