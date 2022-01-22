@@ -3,6 +3,7 @@ library(dplyr)
 library(lubridate)
 library(plotly)
 library(rintrojs)
+Sys.setenv(TZ = "Asia/Kuala_Lumpur")
 
 # Read CSV files
 gps_df <- read.csv('./Data Cleaning & Generation/hospitals_C19_cleaned.csv')
