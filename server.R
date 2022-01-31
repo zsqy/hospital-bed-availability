@@ -267,7 +267,7 @@ server <- function(input, output, session) {
       plotCount <- 1
       annotations <- list()
       nRows <- if (length(hospitals) <= 2) length(hospitals) else ceiling(length(hospitals)/2)
-      
+
       for (hospital in hospitals){
         # calculate monthly average occupancy (%) of each hospital
         df <- state_hospitals[state_hospitals$hospital == hospital,]
@@ -276,14 +276,14 @@ server <- function(input, output, session) {
         agg_df$occ_sum <- aggregate(df$occupancy, by=list(month(df$datetime_sixMonths)), FUN=sum)$x
         agg_df <- mutate(agg_df, percentage = (occ_sum / x)/unique(df$allocated_beds) * 100)
         colnames(agg_df) <- c('year','month_num','day_len', 'occ_sum', 'percentage')
-        agg_df <- agg_df[order(agg_df$year, agg_df$month_num),] 
-        agg_df$date <- as.Date(paste(agg_df$year, agg_df$month_num, 1, sep = "/")) 
-        
-        # plot line graph 
-        fig1 <- plot_ly(agg_df[, c('year', 'month_num', 'percentage', 'date')], 
-                        x=~date, y=~percentage, 
-                        height=round((plotCount+1)/2)*300, type='scatter', 
-                        mode='lines+markers', line=list(color='#000000', width = 1), 
+        agg_df <- agg_df[order(agg_df$year, agg_df$month_num),]
+        agg_df$date <- as.Date(paste(agg_df$year, agg_df$month_num, 1, sep = "/"))
+
+        # plot line graph
+        fig1 <- plot_ly(agg_df[, c('year', 'month_num', 'percentage', 'date')],
+                        x=~date, y=~percentage,
+                        height=round((plotCount+1)/2)*300, type='scatter',
+                        mode='lines+markers', line=list(color='#000000', width = 1),
                         hoverinfo='text',
                         text = ~paste('</br> Date: ', month.abb[month_num], year,
                                       '</br> Beds Occupancy (%): ', sprintf(percentage, fmt = '%#.2f'), '%')) %>%
@@ -291,7 +291,7 @@ server <- function(input, output, session) {
                  xaxis=list(title=list(text="Date", standoff=10), type="date", tickformat="%b<br>%Y"),
                  yaxis=list(title="Monthly Average <br> Beds Occupancy (%)"))
         hospitals_figs[[plotCount]] <- fig1
-        
+
         # set plot title position and details
         annotationsGapY <- list()
         annotationsGapY[[1]] <- 1
@@ -301,7 +301,7 @@ server <- function(input, output, session) {
         annotationsGapY[[5]] <- 0.14
         annotationsGapY[[6]] <- 0.11
         annotationsGapY[[10]] <- 0.065
-        
+
         currentRow = ceiling(plotCount/2)
         yPos = if (nRows == 1)
           annotationsGapY[[1]]
@@ -310,7 +310,7 @@ server <- function(input, output, session) {
           annotationsGapY[[2]]
         else
           1 - (((1 - annotationsGapY[[nRows]]) / (nRows - 1)) * (currentRow - 1))
-        
+
         annotations[[plotCount]] <- list(
           text = paste("<b>",hospital,"</b>"),
           x = if(length(hospitals) <= 2) 0.5 else if(plotCount%%2==1) 0.2 else 0.8,
@@ -332,7 +332,7 @@ server <- function(input, output, session) {
       heightsRatios[[5]] <- c(.1775,.215,.215,.215,.1775)
       heightsRatios[[6]] <- c(.14,.18,.18,.18,.18,.14)
       heightsRatios[[10]] <-  c(.08375, .1040625, .1040625, .1040625, .1040625, .1040625, .1040625, .1040625, .1040625, .08375)
-      
+
       yMargins <- list()
       yMargins[[1]] <- 1
       yMargins[[2]] <- 0.12
@@ -341,16 +341,16 @@ server <- function(input, output, session) {
       yMargins[[5]] <- 0.04
       yMargins[[6]] <- 0.035
       yMargins[[10]] <- 0.02
-      
+
       # combine all the plots in a single canvas
       fig <- subplot(hospitals_figs, titleX= TRUE, titleY = TRUE, nrows=nRows, margin=c(0.08,0.08,yMargins[[nRows]],yMargins[[nRows]]), heights=heightsRatios[[nRows]])
       fig <- fig %>%layout(margin = list(l=0, r=0, b=80, t=85, pad=0), title = list(text="<b style='font-style: oblique;'>Hospitals Beds Occupancy Trend By Hospital</b>", xanchor="middle", yanchor="middle", pad = list(t=20, b = 5000, l = 0, r = 0 )),
-                           font = list(family = 'Arial', size = 11), 
+                           font = list(family = 'Arial', size = 11),
                            plot_bgcolor='#e5ecf6',
                            showlegend=FALSE, annotations= annotations)
       fig$sizingPolicy$padding <- "0"
       fig
-      
+
     } else {
       # find the monthly average occupancy in each hospital
       df <- df_ori[strftime(strptime(df_ori$datetime_sixMonths, "%Y-%m-%e %H:%M"), "%H")=="23",]
@@ -358,15 +358,15 @@ server <- function(input, output, session) {
       agg_df$day_len <- aggregate(df$occupancy, by=list(df$hospital, month(df$datetime_sixMonths)), FUN=length)$x
       colnames(agg_df) <- c('state','hospital','year', 'month_num', 'occ_sum', 'day_len')
       agg_df <- mutate(agg_df, avg_occ = round(occ_sum / day_len))
-      
+
       # sum up the monthly average occupancy in each hospital by state
       agg_df2 <- aggregate(agg_df$avg_occ, by=list(agg_df$state, agg_df$month_num, agg_df$year), FUN=sum)
       colnames(agg_df2) <- c('state', 'month_num', 'year', 'sum_avg_hosps_occ')
-      
+
       # sum up the total allocated beds in each state
       total_allocated_beds_state <- aggregate(gps_df$allocated_beds, by=list(gps_df$state), FUN=sum)
       colnames(total_allocated_beds_state) <- c('state', 'total_alloc_beds')
-      
+
       # find the hospitals beds occupancy in each state and month
       agg_df2 <- merge(agg_df2, total_allocated_beds_state, by="state")
       agg_df2 <- mutate(agg_df2, percentage = (sum_avg_hosps_occ/total_alloc_beds) * 100)
@@ -377,13 +377,13 @@ server <- function(input, output, session) {
       annotations <- list()
       states <- unique(agg_df2$state)
       nRows <- ceiling(length(states)/2)
-      
+
       for (state in states) {
         # filter a single state data
         state_df <- agg_df2[agg_df2$state==state, ]
         state_df <- state_df[order(state_df$year, state_df$month_num), ]
-        state_df$date <- as.Date(paste(state_df$year, state_df$month_num, 1, sep = "/")) 
-        
+        state_df$date <- as.Date(paste(state_df$year, state_df$month_num, 1, sep = "/"))
+
         # plot line graph
         fig1 <- plot_ly(state_df[, c('month_num', 'year', 'percentage', 'date')],
                         x=~date, y=~percentage,
@@ -396,14 +396,14 @@ server <- function(input, output, session) {
                  xaxis=list(title=list(text="Months", standoff=10), type="date", tickformat="%b<br>%Y"),
                  yaxis=list(title="Monthly Average <br> Beds Occupancy (%)"))
         states_figs[[plotCount]] <- fig1
-        
+
         # set plot title position and details
         currentRow = ceiling(plotCount/2)
         yPos = if (nRows == 1)
           1
         else
           1 - (((1 - 0.075) / (nRows - 1)) * (currentRow - 1))
-        
+
         annotations[[plotCount]] <- list(
           text = paste("<b>",state,"</b>"),
           x = if(plotCount%%2==1) 0.2 else 0.8,
@@ -417,7 +417,7 @@ server <- function(input, output, session) {
         )
         plotCount <- plotCount + 1
       }
-      
+
       # combine all the plots in a single canvas
       fig <- subplot(states_figs, titleX= TRUE, titleY = TRUE, nrows = nRows, margin=c(0.08,0.08,0.0275,0.0275), heights=c(0.1046, 0.1318, 0.1318, 0.1318, 0.1318, 0.1318, 0.1318, 0.1046))
       fig <- fig %>%layout(margin = list(l=0, r=0, b=80, t=85, pad=0), title = list(text="<b style='font-style: oblique;'>Hospitals Beds Occupancy Trend By State</b>", xanchor="middle", yanchor="middle", pad = list(t=20, b = 5000, l = 0, r = 0 )),
@@ -428,6 +428,30 @@ server <- function(input, output, session) {
       fig
 
     }
+
+  })
+  
+  
+  output$allInOneGraph <- renderPlotly({
+    df <- df_ori
+    if (input$state != "All") {
+      df <- filter(df, state == input$state)
+    }
+    # filter hospital
+    if (input$hospital != "All") {
+      df <- filter(df, hospital == input$hospital)
+    }
+    df <- df %>% 
+      mutate(rate = occupancy / allocated_beds, month=month(datetime_sixMonths), year=year(datetime_sixMonths)) %>%
+      mutate(date = with(df, sprintf("%d-%02d", year, month))) %>%
+      group_by(date, state) %>%
+      summarise(rate = mean(rate), .groups = 'keep')
+    # df$date <- with(df, sprintf("%d-%02d", year, month))
+    print(df)
+    fig <- plot_ly(df, x = ~date, y = ~rate, color = ~state, type  = 'scatter', mode = 'line') %>%
+      layout(title = 'Occupancy Rate', plot_bgcolor = "#e5ecf6", xaxis = list(title = 'Date'), 
+             yaxis = list(title = 'Occupancy Rate (%)'), legend = list(title=list(text='<b> States </b>')))
+    fig
 
   })
 }

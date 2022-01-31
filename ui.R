@@ -87,6 +87,15 @@ ui <- fluidPage(
           ),
           style = "overflow-y:scroll; overflow-x: hidden; max-height: 1000px;",
         ),
+        tabPanel("All in One Graph",
+           br(),
+           introBox(
+             plotlyOutput('allInOneGraph', height = '600px'),
+             data.step = 6,
+             data.intro = "Same like \"Graph\" but all in one plot"
+           ),
+           style = "overflow-y:scroll; overflow-x: hidden; max-height: 1000px;",
+        ),
       ),
       style = "margin-top: 15px;",
       width = 9
